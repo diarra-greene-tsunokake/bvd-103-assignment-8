@@ -1,0 +1,29 @@
+services:
+  books:
+    image: ghcr.io/diarra-greene-tsunokake/books:latest
+    ports:
+      - "3003:3000"
+    restart: unless-stopped
+
+  warehouse:
+    image: ghcr.io/diarra-greene-tsunokake/warehouse:latest
+    ports:
+      - "3001:3000"
+    restart: unless-stopped
+
+  orders:
+    image: ghcr.io/diarra-greene-tsunokake/orders:latest
+    ports:
+      - "3002:3000"
+    restart: unless-stopped
+
+  docs:
+    image: ghcr.io/diarra-greene-tsunokake/docs:latest
+    ports:
+      - "3004:3000"
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"

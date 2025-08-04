@@ -1,18 +1,43 @@
-version: "4.0"
 
 services:
-  dev:
-    image: mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm
-    volumes:
-      - ../..:/workspaces:cached
-    command: sleep infinity
-    
-  mongo-books:
-    image: mongo:latest
-  mongo-warehouse:
-    image: mongo:latest
-  mongo-order:
-    image: mongo:latest
-    
-  rabbitmq:
-    image: rabbitmq:3.13-management
+  books:
+    build: ./book-list-api
+    ports:
+      - "3003:3000"
+    depends_on:
+      - mongo
+
+  warehouse:
+    build: ./warehouse-api
+    ports:
+      - "3001:3000"
+    depends_on:
+      - mongo
+      - books
+
+  orders:
+    build: ./orders-api
+    ports:
+      - "3002:3000"
+    depends_on:
+      - mongo
+      - books
+      - warehouse
+
+  docs:
+    build: ./swagger-docs
+    ports:
+      - "3004:3000"
+
+  # Optional service - disable for now until it's ready
+  # mcmasterful-books:
+  #   build: ./mcmasterful-books
+  #   ports:
+  #     - "3005:3000"
+  #   depends_on:
+  #     - books
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"

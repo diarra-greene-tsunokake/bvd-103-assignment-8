@@ -1,14 +1,14 @@
-
+version: "3.8"
 services:
   books:
-    build: ./book-list-api
+    build: ./books
     ports:
       - "3003:3000"
     depends_on:
       - mongo
 
   warehouse:
-    build: ./warehouse-api
+    build: ./warehouse
     ports:
       - "3001:3000"
     depends_on:
@@ -16,7 +16,7 @@ services:
       - books
 
   orders:
-    build: ./orders-api
+    build: ./orders
     ports:
       - "3002:3000"
     depends_on:
@@ -29,7 +29,7 @@ services:
     ports:
       - "3004:3000"
 
-  # Optional service - disable for now until it's ready
+  # Optional service - disabled for now
   # mcmasterful-books:
   #   build: ./mcmasterful-books
   #   ports:

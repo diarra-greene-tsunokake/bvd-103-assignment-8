@@ -4,6 +4,7 @@
   "description": "This is a template repository for the first assignment in BVD 103 at McMaster Continuing Education.",
   "main": "index.ts",
   "scripts": {
+    "start": "npm run start-server",
     "start-server": "./generate-openapi.sh && tsx ./index.ts",
     "lint": "./generate-openapi.sh && eslint --no-warn-ignored./**/*.ts",
     "fix-lint": "./generate-openapi.sh && eslint --no-warn-ignored --fix ./**/*.ts",
